@@ -9,3 +9,8 @@ https://www.st.com/content/ccc/resource/technical/document/user_manual/2f/71/ba/
 ## STM32CubeMX
 STM32 프로그래밍의 초기화 코드는 대부분 STM32CubeMX가 자동 생성하여줍니다. 이 부분이 있는 함수들은 자세한 설명을 줄이고 해당 툴로 자동생성이 됨을 알립니다.
 https://www.st.com/en/development-tools/stm32cubemx.html
+
+## Nucleo-F429ZI
+테스트 보드는 Nucleo F429ZI를 사용하였습니다.
+핀맵은 여기에 표시되어 있습니다.
+https://os.mbed.com/platforms/ST-Nucleo-F429ZI/
