@@ -27,6 +27,7 @@ void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState Pin
 - `GPIOx`에 GPIO 포트 입력 (`GPIOx`, x = `A`, `B`, `C`, …)
 - `GPIO_Pin`에 해당 GPIO 포트 번호 입력 (`GPIO_PIN_x`, x = `0`, `1`, `2`, …)
 - `PinState`에 출력값 설정 (`GPIO_PIN_x`, x = `RESET`, `SET`)
+
 ex)
 ```cpp
 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET) // PB7을 HIGH 상태로
@@ -38,6 +39,7 @@ void HAL_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 ```
 - `GPIOx`에 GPIO 포트 입력 (`GPIOx`, x = `A`, `B`, `C`, …)
 - `GPIO_Pin`에 해당 GPIO 포트 번호 입력 (`GPIO_PIN_x`, x = `0`, `1`, `2`, …)
+
 ex) 
 ```cpp
 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7) // PB7의 상태를 토글
@@ -50,7 +52,22 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 - `GPIOx`에 GPIO 포트 입력 (`GPIOx`, x = `A`, `B`, `C`, …)
 - `GPIO_Pin`에 해당 GPIO 포트 번호 입력 (`GPIO_PIN_x`, x = `0`, `1`, `2`, …)
 - return: `GPIO_PIN_x` (x = `SET`, `RESET`)
+
 ex) 
 ```cpp
 GPIO_PinState s = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3) // PB3을 읽어 s에 저장
+```
+
+## User Label이 있는 핀
+STM32CubeMX에서 핀마다 이름을 지정해줄 수 있으며 해당 이름으로 define을 자동 생성합니다.
+이름이 `x`인 경우, 
+- GPIO 포트는 `x_GPIO_Port`
+- 포트 번호는 `x_Pin`
+
+ex)
+```cpp
+// PB7의 User Label이 'LD2'로 되어있다면
+// 아래 코드는 완전히 같은 동작을 보입니다.
+HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
+HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
 ```
