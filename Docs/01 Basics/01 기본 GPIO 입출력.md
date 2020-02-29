@@ -1,4 +1,4 @@
-# 29 HAL GPIO Generic Driver
+# 01 기본 GPIO 입출력
 GPIO의 기본적인 디지털 입출력을 다루는 부분입니다.
 자세한 내용은 [공식문서](https://www.st.com/content/ccc/resource/technical/document/user_manual/2f/71/ba/b8/75/54/47/cf/DM00105879.pdf/files/DM00105879.pdf/jcr:content/translations/en.DM00105879.pdf)의 `29 HAL GPIO Generic Driver`를 참고하시기 바랍니다.
 
