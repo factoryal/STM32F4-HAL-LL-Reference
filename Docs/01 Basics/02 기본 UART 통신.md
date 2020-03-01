@@ -1,9 +1,9 @@
 # 02 기본 UART 통신
 UART 시리얼 통신에 관련된 문서입니다.
-자세한 내용은 [공식문서](https://www.st.com/content/ccc/resource/technical/document/user_manual/2f/71/ba/b8/75/54/47/cf/DM00105879.pdf/files/DM00105879.pdf/jcr:content/translations/en.DM00105879.pdf)의 `67 HAL UART Generic Driver`를 참고하시기 바랍니다.
+모든 자세한 내용은 [공식문서](https://www.st.com/content/ccc/resource/technical/document/user_manual/2f/71/ba/b8/75/54/47/cf/DM00105879.pdf/files/DM00105879.pdf/jcr:content/translations/en.DM00105879.pdf)의 `67 HAL UART Generic Driver`를 참고하시기 바랍니다.
 
 STM32는 AVR 아두이노에 비해 메모리가 훨씬 넉넉하기 때문에 데이터를 전송하거나 수신할 때 필요한 버퍼를 넉넉히 지정해도 됩니다.
-아두이노의 Serial 클래스와 사용방법이 다른 점이 많기 때문에 레퍼런스 내용을 최대한 담도록 하겠습니다.
+아두이노의 Serial 클래스와 사용방법이 다른 점이 많기 때문에 레퍼런스 내용 위주로 담겠습니다.
 
 ## UART_InitTypeDef 구조체
 UART 통신과 관련된 설정을 담는 구조체입니다.
@@ -54,7 +54,7 @@ UART를 통해 데이터를 전송합니다. 아두이노의 `Serial.writeBytes(
 ```cpp
 HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size, uint32_t Timeout);
 ```
-- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
 - `pData`에 전송할 데이터 버퍼의 포인터를 입력합니다.
 - `Size`에 전송할 데이터의 크기를 입력합니다.
 - `Timeout`에 타임아웃 시간을 설정합니다. 제한을 두지 않을 경우, `HAL_MAX_DELAY`로 지정합니다.
@@ -65,7 +65,7 @@ UART를 통해 데이터를 수신합니다. 아두이노의 `Serial.readBytes()
 ```cpp
 HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size, uint32_t Timeout);
 ```
-- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
 - `pData`에 수신할 데이터 버퍼의 포인터를 입력합니다.
 - `Size`에 수신할 데이터의 크기를 입력합니다.
 - `Timeout`에 타임아웃 시간을 설정합니다. 제한을 두지 않을 경우, `HAL_MAX_DELAY`로 지정합니다.
@@ -86,7 +86,7 @@ UART를 통해 데이터를 전송합니다. non-blocking으로 동작합니다.
 ```cpp
 HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size);
 ```
-- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
 - `pData`에 전송할 데이터 버퍼의 포인터를 입력합니다.
 - `Size`에 전송할 데이터의 크기를 입력합니다.
 
@@ -96,7 +96,7 @@ UART를 통해 데이터를 수신합니다. non-blocking으로 동작합니다.
 ```cpp
 HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size);
 ```
-- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
 - `pData`에 수신할 데이터 버퍼의 포인터를 입력합니다.
 - `Size`에 수신할 데이터의 크기를 입력합니다.
 
@@ -105,16 +105,36 @@ HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef* huart, uint8_t* pData,
 전송이 완료되었을 때 동작을 지정할 수 있습니다.
 
 ```cpp
-HAL_UART_TxCpltCallback()
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef* huart) {
+    // user code
+}
 ```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터가 입력됩니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
+
+### 수신 완료 callback
+`HAL_UART_Receive_IT()`로 수신이 완료되면 호출되는 callback 함수입니다.
+수신이 완료되었을 때 동작을 지정할 수 있습니다.
+
+```cpp
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
+    // user code
+}
+```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터가 입력됩니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
 
 ### 에러 발생 callback
 송수신시 에러가 발생하면 호출되는 callback 함수입니다.
-에러가 발생했을 떄 동작을 지정할 수 있습니다.
+에러가 발생했을 때 동작을 지정할 수 있습니다.
 
 ```cpp
-HAL_UART_ErrorCallback()
+void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
+    // user code
+}
 ```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터가 입력됩니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
 
 
 ## DMA Mode
@@ -126,7 +146,7 @@ DMA를 이용하여 UART를 통해 데이터를 전송합니다. non-blocking으
 ```cpp
 HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size);
 ```
-- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
 - `pData`에 전송할 데이터 버퍼의 포인터를 입력합니다.
 - `Size`에 전송할 데이터의 크기를 입력합니다.
 
@@ -136,53 +156,93 @@ DMA를 이용하여 UART를 통해 데이터를 수신합니다. non-blocking으
 ```cpp
 HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size);
 ```
-- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
 - `pData`에 수신할 데이터 버퍼의 포인터를 입력합니다.
 - `Size`에 수신할 데이터의 크기를 입력합니다.
 
 ### 50% 전송 완료 callback
 Interrupt 모드와 달리 데이터의 절반을 전송하면 호출되는 callback 함수가 있습니다.
-50%만큼 전송이 완료되었을 떄 동작을 지정할 수 있습니다.
+50%만큼 전송이 완료되었을 때 동작을 지정할 수 있습니다.
 더블 버퍼링 등으로 응용할 수 있습니다.
 
 ```cpp
-HAL_UART_TxHalfCpltCallback()
+void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef* huart) {
+    // user code
+}
 ```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터가 입력됩니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
 
 ### 100% 전송 완료 callback
 Interrupt 모드에서 전송완료시 호출되는 callback 함수와 동일합니다.
-전송이 완료되었을 떄 동작을 지정할 수 있습니다.
+전송이 완료되었을 때 동작을 지정할 수 있습니다.
 
 ```cpp
-HAL_UART_TxCpltCallback()
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef* huart) {
+    // user code
+}
 ```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터가 입력됩니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
+
+### 50% 수신 완료 callback
+Interrupt 모드와 달리 데이터의 절반을 수신하면 호출되는 callback 함수가 있습니다.
+50%만큼 수신이 완료되었을 때 동작을 지정할 수 있습니다.
+더블 버퍼링 등으로 응용할 수 있습니다.
+
+```cpp
+void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef* huart) {
+    // user code
+}
+```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터가 입력됩니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
+
+### 100% 수신 완료 callback
+Interrupt 모드에서 수신완료시 호출되는 callback 함수와 동일합니다.
+수신이 완료되었을 때 동작을 지정할 수 있습니다.
+
+```cpp
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
+    // user code
+}
+```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터가 입력됩니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
 
 ### 에러 발생 callback
 송수신시 에러가 발생하면 호출되는 callback 함수입니다.
 Interrupt 모드에서 호출되는 함수와 이름이 동일합니다.
-에러가 발생했을 떄 동작을 지정할 수 있습니다.
+에러가 발생했을 때 동작을 지정할 수 있습니다.
 
 ```cpp
-HAL_UART_ErrorCallback()
+void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
+    // usr code
+}
 ```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터가 입력됩니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
 
 ### 송수신 일시정지
 DMA가 UART와 통신하는 것을 일시정지할 수 있습니다.
 
 ```cpp
-HAL_StatusTypeDef HAL_UART_DMAPause()
+HAL_StatusTypeDef HAL_UART_DMAPause(UART_HandleTypeDef* huart);
 ```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
 
 ### 송수신 재개
 `HAL_UART_DMAPause()`로 일시정지했던 DMA와 UART의 통신을 재개합니다.
 
 ```cpp
-HAL_StatusTypeDef HAL_UART_DMAResume()
+HAL_StatusTypeDef HAL_UART_DMAResume(UART_HandleTypeDef* huart);
 ```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
 
 ### 송수신 정지
 DMA가 UART와 통신하는 것을 정지합니다.
 
 ```cpp
-HAL_StatusTypeDef HAL_UART_DMAStop()
+HAL_StatusTypeDef HAL_UART_DMAStop(UART_HandleTypeDef* huart);
 ```
+- `huart`에  UART 설정 정보를 담은 `UART_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx 이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
