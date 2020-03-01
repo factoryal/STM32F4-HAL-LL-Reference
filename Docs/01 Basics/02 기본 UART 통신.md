@@ -80,5 +80,109 @@ HAL_UART_Receive(&huart3, buf, strlen(buf), HAL_MAX_DELAY);
 ## Interrupt Mode
 Interrupt Mode에서는 UART를 통해 송수신하는동안 프로그램이 block 되지 않습니다. (non-blocking)
 
+### 전송
+UART를 통해 데이터를 전송합니다. non-blocking으로 동작합니다.
+
+```cpp
+HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size);
+```
+- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `pData`에 전송할 데이터 버퍼의 포인터를 입력합니다.
+- `Size`에 전송할 데이터의 크기를 입력합니다.
+
+### 수신
+UART를 통해 데이터를 수신합니다. non-blocking으로 동작합니다.
+
+```cpp
+HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size);
+```
+- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `pData`에 수신할 데이터 버퍼의 포인터를 입력합니다.
+- `Size`에 수신할 데이터의 크기를 입력합니다.
+
+### 전송 완료 callback
+`HAL_UART_Transmit_IT()`로 전송이 완료되면 호출되는 callback 함수입니다.
+전송이 완료되었을 때 동작을 지정할 수 있습니다.
+
+```cpp
+HAL_UART_TxCpltCallback()
+```
+
+### 에러 발생 callback
+송수신시 에러가 발생하면 호출되는 callback 함수입니다.
+에러가 발생했을 떄 동작을 지정할 수 있습니다.
+
+```cpp
+HAL_UART_ErrorCallback()
+```
+
+
 ## DMA Mode
 DMA Mode에서는 CPU가 아닌 DMA가 UART를 통해 송수신합니다. 프로그램이 block 되지 않습니다. (non-blocking)
+
+### 전송
+DMA를 이용하여 UART를 통해 데이터를 전송합니다. non-blocking으로 동작합니다.
+
+```cpp
+HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size);
+```
+- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `pData`에 전송할 데이터 버퍼의 포인터를 입력합니다.
+- `Size`에 전송할 데이터의 크기를 입력합니다.
+
+### 수신
+DMA를 이용하여 UART를 통해 데이터를 수신합니다. non-blocking으로 동작합니다.
+
+```cpp
+HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef* huart, uint8_t* pData, uint16_t Size);
+```
+- `huart`에  UART 설정 정보를 담은 UART_HandleTypeDef 구조체 포인터를 입력합니다. STM32CubeMX에서 huartx이름으로 자동생성됩니다. (x = 0, 1, 2, ...)
+- `pData`에 수신할 데이터 버퍼의 포인터를 입력합니다.
+- `Size`에 수신할 데이터의 크기를 입력합니다.
+
+### 50% 전송 완료 callback
+Interrupt 모드와 달리 데이터의 절반을 전송하면 호출되는 callback 함수가 있습니다.
+50%만큼 전송이 완료되었을 떄 동작을 지정할 수 있습니다.
+더블 버퍼링 등으로 응용할 수 있습니다.
+
+```cpp
+HAL_UART_TxHalfCpltCallback()
+```
+
+### 100% 전송 완료 callback
+Interrupt 모드에서 전송완료시 호출되는 callback 함수와 동일합니다.
+전송이 완료되었을 떄 동작을 지정할 수 있습니다.
+
+```cpp
+HAL_UART_TxCpltCallback()
+```
+
+### 에러 발생 callback
+송수신시 에러가 발생하면 호출되는 callback 함수입니다.
+Interrupt 모드에서 호출되는 함수와 이름이 동일합니다.
+에러가 발생했을 떄 동작을 지정할 수 있습니다.
+
+```cpp
+HAL_UART_ErrorCallback()
+```
+
+### 송수신 일시정지
+DMA가 UART와 통신하는 것을 일시정지할 수 있습니다.
+
+```cpp
+HAL_StatusTypeDef HAL_UART_DMAPause()
+```
+
+### 송수신 재개
+`HAL_UART_DMAPause()`로 일시정지했던 DMA와 UART의 통신을 재개합니다.
+
+```cpp
+HAL_StatusTypeDef HAL_UART_DMAResume()
+```
+
+### 송수신 정지
+DMA가 UART와 통신하는 것을 정지합니다.
+
+```cpp
+HAL_StatusTypeDef HAL_UART_DMAStop()
+```
