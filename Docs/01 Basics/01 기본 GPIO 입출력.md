@@ -5,16 +5,16 @@ GPIO의 기본적인 디지털 입출력을 다루는 부분입니다.
 ## GPIO_InitTypeDef 구조체
 GPIO 핀을 초기화하는 옵션을 담는 구조체입니다.
 ```cpp
-uint32_t Pin // 핀 번호. ex) GPIO_PIN_x (x = 0, 1, 2, …)
-uint32_t Mode // 입출력모드. ex) GPIO_MODE_x (x = INPUT, OUTPUT_PP, OUTPUT_OD, …)
-uint32_t Pull // 풀업, 풀다운. ex) GPIO_x (x = NOPULL, PULLUP, PULLDOWN)
-uint32_t Speed // GPIO 속도. ex) GPIO_SPEED_FREQ_x (x = LOW, MEDIUM, HIGH, VERY_HIGH)
-uint32_t Alternate // 대체기능 활성화. ex) GPIO_AFx_y (x = 0, 1, 2, … | y = …)
+uint32_t Pin; // 핀 번호. ex) GPIO_PIN_x (x = 0, 1, 2, …)
+uint32_t Mode; // 입출력모드. ex) GPIO_MODE_x (x = INPUT, OUTPUT_PP, OUTPUT_OD, …)
+uint32_t Pull; // 풀업, 풀다운. ex) GPIO_x (x = NOPULL, PULLUP, PULLDOWN)
+uint32_t Speed; // GPIO 속도. ex) GPIO_SPEED_FREQ_x (x = LOW, MEDIUM, HIGH, VERY_HIGH)
+uint32_t Alternate; // 대체기능 활성화. ex) GPIO_AFx_y (x = 0, 1, 2, … | y = …)
 ```
 
 ## 초기화
 ```cpp
-void HAL_GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_Init)
+void HAL_GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_Init);
 ```
 - `GPIOx`에 GPIO 포트 입력
 - `GPIO_Init` 구조체에 해당 포트 번호와 각종 설정들 입력
@@ -22,7 +22,7 @@ void HAL_GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_Init)
 
 ## 디지털 출력
 ```cpp
-void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState)
+void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
 ```
 - `GPIOx`에 GPIO 포트 입력 (`GPIOx`, x = `A`, `B`, `C`, …)
 - `GPIO_Pin`에 해당 GPIO 포트 번호 입력 (`GPIO_PIN_x`, x = `0`, `1`, `2`, …)
@@ -30,24 +30,24 @@ void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState Pin
 
 ex)
 ```cpp
-HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET) // PB7을 HIGH 상태로
+HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET); // PB7을 HIGH 상태로
 ```
 
 ## 디지털 출력 토글
 ```cpp
-void HAL_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+void HAL_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 ```
 - `GPIOx`에 GPIO 포트 입력 (`GPIOx`, x = `A`, `B`, `C`, …)
 - `GPIO_Pin`에 해당 GPIO 포트 번호 입력 (`GPIO_PIN_x`, x = `0`, `1`, `2`, …)
 
 ex) 
 ```cpp
-HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7) // PB7의 상태를 토글
+HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); // PB7의 상태를 토글
 ```
 
 ## 디지털 입력
 ```cpp
-GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 ```
 - `GPIOx`에 GPIO 포트 입력 (`GPIOx`, x = `A`, `B`, `C`, …)
 - `GPIO_Pin`에 해당 GPIO 포트 번호 입력 (`GPIO_PIN_x`, x = `0`, `1`, `2`, …)
@@ -55,7 +55,7 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 
 ex) 
 ```cpp
-GPIO_PinState s = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3) // PB3을 읽어 s에 저장
+GPIO_PinState s = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3); // PB3을 읽어 s에 저장
 ```
 
 ## User Label이 있는 핀
