@@ -113,7 +113,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef* huart) {
 - 자동생성되지 않으므로 필요한 경우 함수를 수동으로 선언해주어야 합니다.
 
 ### 수신 완료 callback
-`HAL_UART_Receive_IT()`로 수신이 완료되면 호출되는 callback 함수입니다.
+`HAL_UART_Receive_IT()`로 수신이 완료되면 호출되는 callback 함수입니다. 
 수신이 완료되었을 때 동작을 지정할 수 있습니다.
 
 ```cpp
