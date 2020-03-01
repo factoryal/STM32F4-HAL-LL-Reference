@@ -78,7 +78,8 @@ HAL_UART_Receive(&huart3, buf, strlen(buf), HAL_MAX_DELAY);
 
 
 ## Interrupt Mode
-Interrupt Mode에서는 UART를 통해 송수신하는동안 프로그램이 block 되지 않습니다. (non-blocking)
+Interrupt Mode에서는 UART를 통해 송수신하는동안 프로그램이 block 되지 않습니다. (non-blocking)  
+Interrupt Mode를 사용하기 위해서 STM32CubeMX에서 UART의 global interrupt를 활성화해야 합니다.
 
 ### 전송
 UART를 통해 데이터를 전송합니다. non-blocking으로 동작합니다.
@@ -138,7 +139,8 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
 
 
 ## DMA Mode
-DMA Mode에서는 CPU가 아닌 DMA가 UART를 통해 송수신합니다. 프로그램이 block 되지 않습니다. (non-blocking)
+DMA Mode에서는 CPU가 아닌 DMA가 UART를 통해 송수신합니다. 프로그램이 block 되지 않습니다. (non-blocking)  
+DMA Mode를 사용하기 위해서 STM32CubeMX에서 UART를 DMA와 연결하고 NVIC를 허용해야 합니다.
 
 ### 전송
 DMA를 이용하여 UART를 통해 데이터를 전송합니다. non-blocking으로 동작합니다.
