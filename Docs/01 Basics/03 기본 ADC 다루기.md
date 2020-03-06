@@ -86,3 +86,58 @@ uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* hadc);
 HAL_StatusTypeDef HAL_ADC_Stop(ADC_HandleTypeDef* hadc);
 ```
 - `hadc`에 ADC 설정 정보를 담은 `ADC_HandleTypeDef` 구조체 포인터를 입력합니다. STM32CubeMX에서 hadcx 이름으로 자동 생성됩니다. (x = 0, 1, ...);
+
+### 예제
+```cpp
+uint32_t val;
+HAL_ADC_Start(&adc1);
+HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
+val = HAL_ADC_GetValue(&hadc1);
+HAL_ADC_Stop(&hadc1);
+```
+
+
+## Interrupt Mode
+ADC 변환이 끝나는 것을 polling하는 대신 interrupt를 사용하여 처리합니다.
+코드가 block 되지 않으며, ADC 변환 후 콜백함수를 실행하게 됩니다.
+
+### 샘플링 및 변환 시작
+ADC의 전압을 읽는 것을 시작하는 함수입니다.
+```cpp
+HAL_ADC_Start_IT()
+```
+
+### HAL_ADC_IRQHandler()
+
+### HAL_ADC_ConvCpltCallback()
+ADC 변환이 끝나면 호출되는 callback 함수입니다.
+
+### HAL_ADC_ErrorCallback()
+ADC 오류가 발생하면 호출되는 callback 함수입니다.
+
+### HAL_ADC_Stop_IT()
+측정이 끝나면 이 함수로 ADC 변환작업을 끝내고 멈추게 합니다.
+
+
+## DMA Mode
+ADC 변환 후 CPU 대신 DMA를 활용하여 메모리에 저장합니다.  
+코드가 block 되지 않으며, ADC 변환 후 콜백함수를 실행하게 됩니다.
+
+### 샘플링 및 변환 시작
+ADC의 전압을 읽는 것을 시작하는 함수입니다.ㅉㅉ
+```cpp
+HAL_ADC_Start_DMA()
+```
+
+### HAL_ADC_ConvHalfCpltCallback()
+DMA가 저장하는공간에 절반의 데이터가 차면 싱행되는 콜백함수입니다.  
+더블 버퍼링 등으로 응용할 수 있습니다.
+
+### HAL_ADC_ConvCpltCallback()
+dma가 저장하는 공간이 모두 데이터가 차면 실행되는 콜백함수입니다.
+
+### HAL_ADC_ErrorCallback()
+ADC 오류가 발생하면 호출되는 callback 함수입니다.  
+Interrupt Mode의 callback 함수와 동일합니다.
+
+### HAL_ADC_Stop_DMA()
